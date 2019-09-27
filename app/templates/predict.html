@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<style type="text/css">
+			.fieldset-auto-width {
+				display: inline-block;
+			}
+</style>
+		<title>Catégorisation automatique</title>
+	</head>
+	<body>
+	<h1>Catégorisation automatique de question technique</h1>
+	<p>
+	<p>
+    <form action="{{ url_for('show_form') }}" method="post" novalidate>
+		<fieldset class="fieldset-auto-width">
+		<legend>Texte de la question à catégoriser</legend>
+        {{ form.hidden_tag() }}
+		{% for field in form %} 
+			{%if ((field.widget.input_type != 'hidden') and
+				  (field.type != 'SubmitField'))%}
+				{{ field(rows='20',cols='100') }}
+				{% for error in field.errors %}
+					<span style="color: red;">[{{ error }}]</span>
+				{% endfor %}
+				</p>
+			{% endif %}
+		{% endfor %}		
+		<p>{{ form.submit() }}</p> 	
+		</fieldset>
+	</form>
+    {% if model %}
+        <b>Prédiction par modèle {{model.model1_name}} : {{model.cat1}}.</b>
+		<p>
+    {% endif %}	
+</html>
+
